@@ -39,12 +39,15 @@ app.get('/test-connection-oracle', async (req, res) => {
 app.get('/employees', async (req, res) => {
   let connection;
   try {
+    // Connect to Oracle
     connection = await oracledb.getConnection(dbConfig);
-    const result = await connection.execute('SELECT * FROM EMPLOYEES_SELECTED');
-    res.json(result.rows); // Oracle returns rows as array
+    // Execute query
+    const result = await connection.execute('SELECT * FROM EMPLOYEES_SELECTED', [], { outFormat: oracledb.OUT_FORMAT_OBJECT });
+    // result.rows will be an array of objects with column names as keys
+    res.json(result.rows);
   } catch (err) {
     console.error('Error fetching data:', err);
-    res.status(500).send('Error fetching data');
+    res.status(500).json({ error: 'Error fetching data' });
   } finally {
     if (connection) {
       try {
@@ -55,6 +58,7 @@ app.get('/employees', async (req, res) => {
     }
   }
 });
+
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
