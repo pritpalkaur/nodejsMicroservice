@@ -1,7 +1,9 @@
 const express = require('express');
 const oracledb = require('oracledb');
-
+const cors = require('cors');
 const app = express();
+
+app.use(cors());
 const port = 3000;
 
 // Oracle DB configuration

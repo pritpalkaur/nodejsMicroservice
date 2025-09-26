@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+  <meta charset="UTF-8" />
+  <title>AngularJS & Node API Demo</title>
+  <!-- Include AngularJS CDN -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+  <script src="app.js"></script>
+</head>
+<body ng-controller="MainController">
+
+  <h1>Employee Data from API</h1>
+
+  <button ng-click="checkConnection()">Test DB Connection</button>
+  <p>{{connectionStatus}}</p>
+
+  <h2>Employees:</h2>
+  <button ng-click="loadEmployees()">Load Employees</button>
+
+  <table border="1" ng-if="employees.length > 0">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Job Title</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="employee in employees">
+        <td>{{employee.EMPLOYEE_ID}}</td>
+        <td>{{employee.FIRST_NAME}}</td>
+        <td>{{employee.LAST_NAME}}</td>
+        <td>{{employee.JOB_TITLE}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+</body>
+</html>
